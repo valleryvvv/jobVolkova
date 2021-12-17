@@ -38,7 +38,7 @@ public class HistoryMongo {
             document.put("status", historyContent.getStatus().toString());
             collection.insertOne(document);
         }catch (Exception e){
-            log.info(e);
+            log.error(e);
         }
     }
 

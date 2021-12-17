@@ -461,3 +461,77 @@ java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
 12.09 20.48.02  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
 12.09 20.48.13  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
 12.09 20.48.20  INFO	ru.sfedu.dataProvider.DataProviderCSV:32 - Rollingson
+12.10 08.39.56  INFO	utils.HistoryMongo:41 - com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches com.mongodb.client.internal.MongoClientDelegate$1@55787112. Client view of cluster state is {type=REPLICA_SET, servers=[{address=cluster0-shard-00-00.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketException: cluster0-shard-00-00.fogtb.mongodb.net}, caused by {java.net.UnknownHostException: cluster0-shard-00-00.fogtb.mongodb.net}}, {address=cluster0-shard-00-01.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketException: cluster0-shard-00-01.fogtb.mongodb.net}, caused by {java.net.UnknownHostException: cluster0-shard-00-01.fogtb.mongodb.net}}, {address=cluster0-shard-00-02.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketException: cluster0-shard-00-02.fogtb.mongodb.net}, caused by {java.net.UnknownHostException: cluster0-shard-00-02.fogtb.mongodb.net}}]
+12.10 08.40.26  INFO	utils.HistoryMongo:41 - com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches com.mongodb.client.internal.MongoClientDelegate$1@42b64ab8. Client view of cluster state is {type=REPLICA_SET, servers=[{address=cluster0-shard-00-00.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Exception receiving message}, caused by {javax.net.ssl.SSLException: Connection reset}, caused by {java.net.SocketException: Connection reset}}, {address=cluster0-shard-00-01.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Exception receiving message}, caused by {javax.net.ssl.SSLException: Connection reset}, caused by {java.net.SocketException: Connection reset}}, {address=cluster0-shard-00-02.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}]
+12.10 08.40.26  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
+12.10 08.40.57  INFO	utils.HistoryMongo:41 - com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches com.mongodb.client.internal.MongoClientDelegate$1@1d1f7216. Client view of cluster state is {type=REPLICA_SET, servers=[{address=cluster0-shard-00-00.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=cluster0-shard-00-01.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Exception receiving message}, caused by {javax.net.ssl.SSLException: Connection reset}, caused by {java.net.SocketException: Connection reset}}, {address=cluster0-shard-00-02.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Exception receiving message}, caused by {javax.net.ssl.SSLException: Connection reset}, caused by {java.net.SocketException: Connection reset}}]
+12.10 08.41.27  INFO	utils.HistoryMongo:41 - com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches com.mongodb.client.internal.MongoClientDelegate$1@c7a975a. Client view of cluster state is {type=REPLICA_SET, servers=[{address=cluster0-shard-00-00.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Exception receiving message}, caused by {javax.net.ssl.SSLException: Connection reset}, caused by {java.net.SocketException: Connection reset}}, {address=cluster0-shard-00-01.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Exception receiving message}, caused by {javax.net.ssl.SSLException: Connection reset}, caused by {java.net.SocketException: Connection reset}}, {address=cluster0-shard-00-02.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Exception receiving message}, caused by {javax.net.ssl.SSLException: Connection reset}, caused by {java.net.SocketException: Connection reset}}]
+12.10 08.42.29  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
+12.10 08.57.12  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
+12.10 09.10.55  INFO	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.10 09.10.55  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
+12.10 09.10.58  INFO	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.10 12.09.52 ERROR	ru.sfedu.dataProvider.DataProviderXML:29 - javax.xml.stream.XMLStreamException: ParseError at [row,col]:[1,1]
+Message: Content is not allowed in prolog.
+12.13 00.58.21 ERROR	utils.MySQLUtil:30 - java.sql.SQLException: Can't create database 'job'; database exists
+12.13 01.20.37 ERROR	utils.MySQLUtil:46 - java.sql.SQLException: Illegal operation on empty result set.
+12.13 01.23.22 ERROR	utils.MySQLUtil:52 - java.sql.SQLException: Illegal operation on empty result set.
+12.14 20.11.07 ERROR	utils.MySQLUtil:20 - null
+12.14 20.11.36 ERROR	utils.MySQLUtil:41 - java.sql.SQLSyntaxErrorException: Table 'feedback' already exists
+12.14 20.21.12 ERROR	utils.MySQLUtil:41 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+12.14 20.34.25  INFO	utils.MySQLUtil:42 - все ок
+12.14 21.00.24  INFO	ru.sfedu.Job:50 - sss
+12.14 21.00.37  INFO	ru.sfedu.Job:50 - 24.11.2000
+12.15 17.34.33  INFO	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.15 17.34.33  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
+12.15 17.34.35  INFO	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.15 17.46.37 ERROR	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.15 17.46.37  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
+12.15 17.46.39 ERROR	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.15 17.51.31  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
+12.15 17.51.33 ERROR	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.15 17.55.14 ERROR	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.15 17.55.14  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
+12.15 17.55.16 ERROR	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.15 17.57.48 ERROR	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.15 17.57.48  INFO	ru.sfedu.dataProvider.DataProviderCSV:19 - 1
+12.15 18.06.53 ERROR	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class java.util.Optional.
+12.15 19.47.50 ERROR	ru.sfedu.dataProvider.DataProviderMySQL:168 - java.sql.SQLException: Can not issue data manipulation statements with executeQuery().
+12.15 19.47.50  INFO	ru.sfedu.Job:54 - 24.11.2000
+12.15 19.52.56 ERROR	ru.sfedu.dataProvider.DataProviderMySQL:169 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.2000, c, 99, false)' at line 1
+12.15 19.52.56  INFO	ru.sfedu.Job:54 - 24.11.2000
+12.15 19.54.03 ERROR	ru.sfedu.dataProvider.DataProviderMySQL:170 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.2000, c, 99, false)' at line 1
+12.15 19.54.03  INFO	ru.sfedu.Job:54 - 24.11.2000
+12.15 19.58.35  INFO	ru.sfedu.Job:62 - 24.11.2000
+12.15 19.58.35  INFO	ru.sfedu.Job:62 - 12.12.2000
+12.16 17.25.39 ERROR	utils.HistoryMongo:41 - org.bson.codecs.configuration.CodecConfigurationException: Can't find a codec for class ru.sfedu.model.Profile.
+12.16 17.44.54 ERROR	ru.sfedu.dataProvider.DataProviderMySQL:188 - com.mysql.cj.jdbc.exceptions.MysqlDataTruncation: Data truncation: Out of range value for column 'userIdTo' at row 1
+12.16 17.46.28 ERROR	ru.sfedu.dataProvider.DataProviderMySQL:188 - java.sql.SQLException: Incorrect integer value: 'Superu' for column 'estimation' at row 1
+12.16 17.49.06  INFO	ru.sfedu.Job:67 - Superu
+12.16 17.50.47  INFO	ru.sfedu.Job:65 - VVV
+12.16 17.51.56  INFO	ru.sfedu.Job:67 - VVV
+12.16 17.53.49  INFO	ru.sfedu.Job:68 - Lala
+12.16 18.20.16  INFO	ru.sfedu.Job:69 - ff
+12.16 18.20.16  INFO	ru.sfedu.Job:69 - Lala
+12.16 18.20.16  INFO	ru.sfedu.Job:69 - ff
+12.16 18.20.16  INFO	ru.sfedu.Job:69 - ff
+12.16 22.44.20 ERROR	ru.sfedu.dataProvider.DataProviderXML:247 - java.lang.IndexOutOfBoundsException: Index -1 out of bounds for length 0
+12.16 22.51.33 ERROR	ru.sfedu.dataProvider.DataProviderXML:56 - java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+12.16 22.52.10 ERROR	ru.sfedu.dataProvider.DataProviderXML:247 - java.lang.IndexOutOfBoundsException: Index -1 out of bounds for length 2
+12.16 22.52.10 ERROR	ru.sfedu.dataProvider.DataProviderXML:248 - java.lang.IndexOutOfBoundsException: Index -1 out of bounds for length 2
+12.16 22.52.10 ERROR	ru.sfedu.dataProvider.DataProviderXML:300 - java.lang.NullPointerException: Cannot invoke "Object.getClass()" because "profile" is null
+12.16 22.52.10 ERROR	ru.sfedu.dataProvider.DataProviderXML:56 - java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+12.16 22.53.21 ERROR	ru.sfedu.dataProvider.DataProviderXML:56 - java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+12.17 08.16.03  INFO	ru.sfedu.dataProvider.DataProviderXML:83 - com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches com.mongodb.client.internal.MongoClientDelegate$1@2289aca5. Client view of cluster state is {type=REPLICA_SET, servers=[{address=cluster0-shard-00-00.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=cluster0-shard-00-01.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=cluster0-shard-00-02.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}]
+12.17 08.16.34  INFO	ru.sfedu.dataProvider.DataProviderXML:83 - com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches com.mongodb.client.internal.MongoClientDelegate$1@439a8f59. Client view of cluster state is {type=REPLICA_SET, servers=[{address=cluster0-shard-00-00.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=cluster0-shard-00-01.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=cluster0-shard-00-02.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}]
+12.17 08.16.34 ERROR	ru.sfedu.dataProvider.DataProviderXML:247 - java.lang.IndexOutOfBoundsException: Index -1 out of bounds for length 4
+12.17 08.16.34 ERROR	ru.sfedu.dataProvider.DataProviderXML:299 - java.lang.NullPointerException: Cannot invoke "Object.getClass()" because "profile" is null
+12.17 08.16.34 ERROR	ru.sfedu.dataProvider.DataProviderXML:56 - java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+12.17 08.17.04  INFO	ru.sfedu.dataProvider.DataProviderXML:83 - com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches com.mongodb.client.internal.MongoClientDelegate$1@63cd604c. Client view of cluster state is {type=REPLICA_SET, servers=[{address=cluster0-shard-00-00.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=cluster0-shard-00-01.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=cluster0-shard-00-02.fogtb.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}]
+12.17 08.49.04 ERROR	utils.MySQLUtil:21 - java.sql.SQLException: The server time zone value 'RTZ 2 (çèìà)' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
+12.17 08.49.05 ERROR	ru.sfedu.dataProvider.DataProviderMySQL:171 - java.lang.NullPointerException: Cannot invoke "java.sql.Connection.createStatement()" because "this.connection" is null
+12.17 08.49.05 ERROR	ru.sfedu.dataProvider.DataProviderMySQL:38 - java.lang.NullPointerException: Cannot invoke "java.sql.Connection.prepareStatement(String)" because "this.connection" is null
+12.17 08.50.21 ERROR	utils.MySQLUtil:21 - java.sql.SQLException: The server time zone value 'RTZ 2 (çèìà)' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
+12.17 08.50.21 ERROR	ru.sfedu.dataProvider.DataProviderMySQL:171 - java.lang.NullPointerException: Cannot invoke "java.sql.Connection.createStatement()" because "this.connection" is null
+12.17 08.51.26 ERROR	utils.MySQLUtil:21 - java.sql.SQLException: The server time zone value 'RTZ 2 (çèìà)' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
+12.17 08.51.26 ERROR	ru.sfedu.dataProvider.DataProviderMySQL:171 - java.lang.NullPointerException: Cannot invoke "java.sql.Connection.createStatement()" because "this.connection" is null

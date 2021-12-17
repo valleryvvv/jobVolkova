@@ -1,28 +1,37 @@
 package ru.sfedu.model;
 
 import com.opencsv.bean.CsvBindByName;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 import ru.sfedu.Constants;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Root(name = "Feedback")
 public class Feedback implements Serializable {
 
+    @Element(name = Constants.FEEDBACK_FEEDBACK_ID)
     @CsvBindByName(column = Constants.FEEDBACK_FEEDBACK_ID)
     private long feedbackId;
 
+    @Element(name = Constants.FEEDBACK_USER_ID_TO)
     @CsvBindByName(column = Constants.FEEDBACK_USER_ID_TO)
     private long userIdTo;
 
+    @Element(name = Constants.FEEDBACK_USER_ID_FROM)
     @CsvBindByName(column = Constants.FEEDBACK_USER_ID_FROM)
     private long userIdFrom;
 
+    @Element(name = Constants.FEEDBACK_TEXT)
     @CsvBindByName(column = Constants.FEEDBACK_TEXT)
     private String text;
 
+    @Element(name = Constants.FEEDBACK_ESTIMATION)
     @CsvBindByName(column = Constants.FEEDBACK_ESTIMATION)
     private int estimation;
 
+    @Element(name = Constants.FEEDBACK_DATE)
     @CsvBindByName(column = Constants.FEEDBACK_DATE)
     private String date;
 

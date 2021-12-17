@@ -1,5 +1,6 @@
 package ru.sfedu.dataProvider;
 
+import com.google.gson.Gson;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
@@ -13,8 +14,11 @@ import ru.sfedu.model.*;
 import utils.HistoryMongo;
 
 import java.io.*;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.lang.Thread.currentThread;
@@ -48,7 +52,8 @@ public class DataProviderCSV implements Interface {
         return bean;
     }
 
-    private void sendHistory(String className, String methodName, Object object, Status status){
+    @Override
+    public void sendHistory(String className, String methodName, Object object, Status status){
         long id = new Date().getTime();
         Date createdDate = new Date();
         String actor = Constants.DEFAULT_ACTOR;
@@ -71,7 +76,7 @@ public class DataProviderCSV implements Interface {
         return list;
     }
 
-    private <T> Status beanToCsv(List<T> list, String className, String method){
+    private <T> Status beanToCsv(List<T> list, String className, String method, Object object){
         Writer writer = null;
         try {
             writer = new FileWriter(findPath(list));
@@ -80,7 +85,7 @@ public class DataProviderCSV implements Interface {
                     .build();
             sbc.write(list);
             writer.close();
-            sendHistory(className, method, null, Status.SUCCESS);
+            sendHistory(className, method, object, Status.SUCCESS);
             return Status.SUCCESS;
         } catch (Exception e) {
             log.error(e);
@@ -103,7 +108,7 @@ public class DataProviderCSV implements Interface {
                 return Constants.CSV_PATH_VACANCY;
         }
         log.error("File not found!!!");
-        return Constants.CSV_PATH_UNDEFINED;
+        return Constants.PATH_UNDEFINED;
     }
 
     private static <T> String findPath(List<T> bean){
@@ -120,7 +125,7 @@ public class DataProviderCSV implements Interface {
                 return Constants.CSV_PATH_VACANCY;
         }
         log.error("File not found!!!");
-        return Constants.CSV_PATH_UNDEFINED;
+        return Constants.PATH_UNDEFINED;
     }
 
 
@@ -128,14 +133,7 @@ public class DataProviderCSV implements Interface {
     @Override
     public List<Profile> selectProfile() {
         Profile profiles = new Profile();
-        String method = currentThread().getStackTrace()[1].getMethodName();
         List<Profile> list = csvToBean(profiles);
-
-        if (list != null) {
-            sendHistory(profiles.getClass().getSimpleName(), method, null, Status.SUCCESS);
-        } else {
-            sendHistory("Profile", method, null, Status.FAULT);
-        }
         return list;
     }
 
@@ -144,12 +142,6 @@ public class DataProviderCSV implements Interface {
         Profile profile = selectProfile().stream()
                 .filter(beans -> (beans).getUserId() == userId)
                 .findFirst().orElse(null);
-        String method = currentThread().getStackTrace()[1].getMethodName();
-        if (profile != null) {
-            sendHistory(profile.getClass().getSimpleName(), method, null, Status.SUCCESS);
-        } else {
-            sendHistory("Profile", method, null, Status.FAULT);
-        }
         return profile;
     }
 
@@ -157,39 +149,49 @@ public class DataProviderCSV implements Interface {
     public void insertProfile(Profile profile) {
         List<Profile> profiles = csvToBean(profile);
         profiles.add(profile);
+//        Gson gson = new Gson();
+//        String json = gson.toJson(profile);
+//        Optional<Profile> p = Optional.ofNullable(profile);
+        List p = Arrays.asList(profile.getUserId(), profile.getName());
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(profiles, profiles.getClass().getSimpleName(), method);
+        beanToCsv(profiles, profiles.getClass().getSimpleName(), method, p);
     }
 
     @Override
-    public void deleteProfileById(long userId) {
-        List<Profile> list = selectProfile();
-        list.removeIf(beans -> (beans).getUserId()==userId);
-        String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(list, list.getClass().getSimpleName(), method);
+    public Status deleteProfileById(long userId) {
+        try {
+            List<Profile> list = selectProfile();
+            list.removeIf(beans -> (beans).getUserId() == userId);
+            Profile profile = profileGetById(userId);
+            String method = currentThread().getStackTrace()[1].getMethodName();
+            beanToCsv(list, list.getClass().getSimpleName(), method, profile);
+            return Status.SUCCESS;
+        }catch(Exception e){
+            log.error(e);
+            return Status.FAULT;
+        }
     }
 
     @Override
-    public void editProfile(long userId, Profile profile) {
-        List<Profile> list = selectProfile();
-        int index = list.indexOf(profileGetById(userId));
-        list.set(index, profile);
-        String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(list, list.getClass().getSimpleName(), method);
+    public Status editProfile(long userId, Profile profile) {
+        try {
+            List<Profile> list = selectProfile();
+            int index = list.indexOf(profileGetById(userId));
+            list.set(index, profile);
+            String method = currentThread().getStackTrace()[1].getMethodName();
+            beanToCsv(list, list.getClass().getSimpleName(), method, profile);
+            return Status.SUCCESS;
+        }catch (Exception e){
+            log.error(e);
+            return Status.FAULT;
+        }
 
     }
 
     @Override
     public List<Feedback> selectFeedback() {
         Feedback feedback = new Feedback();
-        String method = currentThread().getStackTrace()[1].getMethodName();
         List<Feedback> list = csvToBean(feedback);
-
-        if (list != null) {
-            sendHistory(feedback.getClass().getSimpleName(), method, null, Status.SUCCESS);
-        } else {
-            sendHistory("Feedback", method, null, Status.FAULT);
-        }
         return list;
     }
 
@@ -198,12 +200,6 @@ public class DataProviderCSV implements Interface {
         Feedback bean = selectFeedback().stream()
                 .filter(beans -> (beans).getFeedbackId() == feedbackId)
                 .findFirst().orElse(null);
-        String method = currentThread().getStackTrace()[1].getMethodName();
-        if (bean != null) {
-            sendHistory(bean.getClass().getSimpleName(), method, null, Status.SUCCESS);
-        } else {
-            sendHistory("Feedback", method, null, Status.FAULT);
-        }
         return bean;
     }
 
@@ -212,7 +208,7 @@ public class DataProviderCSV implements Interface {
         List<Feedback> feedbacks = csvToBean(feedback);
         feedbacks.add(feedback);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        Status status = beanToCsv(feedbacks, feedback.getClass().getSimpleName(), method);
+        Status status = beanToCsv(feedbacks, feedback.getClass().getSimpleName(), method, feedback);
         if (status == Status.SUCCESS){
             changeRating(feedback.getUserIdTo(), feedback.getEstimation());
             return Status.SUCCESS;
@@ -231,8 +227,9 @@ public class DataProviderCSV implements Interface {
     public void deleteFeedbackById(long feedbackId) {
         List<Feedback> list = selectFeedback();
         list.removeIf(beans -> (beans).getFeedbackId()==feedbackId);
+        Feedback feedback = feedbackGetById(feedbackId);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(list, list.getClass().getSimpleName(), method);
+        beanToCsv(list, list.getClass().getSimpleName(), method, feedback);
     }
 
     @Override
@@ -241,48 +238,27 @@ public class DataProviderCSV implements Interface {
         int index = list.indexOf(feedbackGetById(feedbackId));
         list.set(index, feedback);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(list, list.getClass().getSimpleName(), method);
+        beanToCsv(list, list.getClass().getSimpleName(), method, feedback);
     }
 
     @Override
     public List<ProfileEmployee> selectProfileEmployee() {
         ProfileEmployee profileEmployee = new ProfileEmployee();
-        String method = currentThread().getStackTrace()[1].getMethodName();
         List<ProfileEmployee> list = csvToBean(profileEmployee);
-
-        if (list != null) {
-            sendHistory(profileEmployee.getClass().getSimpleName(), method, null, Status.SUCCESS);
-        } else {
-            sendHistory("ProfileEmployee", method, null, Status.FAULT);
-        }
         return list;
     }
 
     @Override
     public List<ProfileEmployer> selectProfileEmployer() {
         ProfileEmployer profileEmployer = new ProfileEmployer();
-        String method = currentThread().getStackTrace()[1].getMethodName();
         List<ProfileEmployer> list = csvToBean(profileEmployer);
-
-        if (list != null) {
-            sendHistory(profileEmployer.getClass().getSimpleName(), method, null, Status.SUCCESS);
-        } else {
-            sendHistory("ProfileEmployer", method, null, Status.FAULT);
-        }
         return list;
     }
 
     @Override
     public List<Vacancy> selectVacancy() {
         Vacancy vacancy = new Vacancy();
-        String method = currentThread().getStackTrace()[1].getMethodName();
         List<Vacancy> list = csvToBean(vacancy);
-
-        if (list != null) {
-            sendHistory(vacancy.getClass().getSimpleName(), method, null, Status.SUCCESS);
-        } else {
-            sendHistory("Vacancy", method, null, Status.FAULT);
-        }
         return list;
     }
 
@@ -291,12 +267,6 @@ public class DataProviderCSV implements Interface {
         ProfileEmployee bean = selectProfileEmployee().stream()
                 .filter(beans -> (beans).getUserId() == profileEmployeeId)
                 .findFirst().orElse(null);
-        String method = currentThread().getStackTrace()[1].getMethodName();
-        if (bean != null) {
-            sendHistory(bean.getClass().getSimpleName(), method, null, Status.SUCCESS);
-        } else {
-            sendHistory("ProfileEmployee", method, null, Status.FAULT);
-        }
         return bean;
     }
 
@@ -305,12 +275,6 @@ public class DataProviderCSV implements Interface {
         ProfileEmployer bean = selectProfileEmployer().stream()
                 .filter(beans -> (beans).getUserId() == profileEmployerId)
                 .findFirst().orElse(null);
-        String method = currentThread().getStackTrace()[1].getMethodName();
-        if (bean != null) {
-            sendHistory(bean.getClass().getSimpleName(), method, null, Status.SUCCESS);
-        } else {
-            sendHistory("ProfileEmployer", method, null, Status.FAULT);
-        }
         return bean;
     }
 
@@ -319,12 +283,6 @@ public class DataProviderCSV implements Interface {
         Vacancy bean = selectVacancy().stream()
                 .filter(beans -> (beans).getVacancyId() == vacancyId)
                 .findFirst().orElse(null);
-        String method = currentThread().getStackTrace()[1].getMethodName();
-        if (bean != null) {
-            sendHistory(bean.getClass().getSimpleName(), method, null, Status.SUCCESS);
-        } else {
-            sendHistory("Vacancy", method, null, Status.FAULT);
-        }
         return bean;
     }
 
@@ -333,7 +291,7 @@ public class DataProviderCSV implements Interface {
         List<ProfileEmployee> profileEmployees = csvToBean(profileEmployee);
         profileEmployees.add(profileEmployee);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(profileEmployees, profileEmployee.getClass().getSimpleName(), method);
+        beanToCsv(profileEmployees, profileEmployee.getClass().getSimpleName(), method, profileEmployee);
     }
 
     @Override
@@ -341,7 +299,7 @@ public class DataProviderCSV implements Interface {
         List<ProfileEmployer> profileEmployers = csvToBean(profileEmployer);
         profileEmployers.add(profileEmployer);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        Status status = beanToCsv(profileEmployers, profileEmployer.getClass().getSimpleName(), method);
+        Status status = beanToCsv(profileEmployers, profileEmployer.getClass().getSimpleName(), method, profileEmployer);
         if (status == Status.SUCCESS){
             Vacancy vacancy = new Vacancy();
             postVacancy(vacancy);
@@ -355,31 +313,34 @@ public class DataProviderCSV implements Interface {
         List<Vacancy> vacancys = csvToBean(vacancy);
         vacancys.add(vacancy);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(vacancys, vacancy.getClass().getSimpleName(), method);
+        beanToCsv(vacancys, vacancy.getClass().getSimpleName(), method, vacancy);
     }
 
     @Override
     public void deleteProfileEmployeeBuId(long userId) {
         List<ProfileEmployee> list = selectProfileEmployee();
         list.removeIf(beans -> (beans).getUserId()==userId);
+        ProfileEmployee profileEmployee = profileEmployeeGetById(userId);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(list, list.getClass().getSimpleName(), method);
+        beanToCsv(list, list.getClass().getSimpleName(), method, profileEmployee);
     }
 
     @Override
     public void deleteProfileEmployerById(long userId) {
         List<ProfileEmployer> list = selectProfileEmployer();
         list.removeIf(beans -> (beans).getUserId()==userId);
+        ProfileEmployer profileEmployer = profileEmployerGetById(userId);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(list, list.getClass().getSimpleName(), method);
+        beanToCsv(list, list.getClass().getSimpleName(), method, profileEmployer);
     }
 
     @Override
     public void deleteVacancyById(long vacancyId) {
         List<Vacancy> list = selectVacancy();
         list.removeIf(beans -> (beans).getVacancyId()==vacancyId);
+        Vacancy vacancy = vacancyGetById(vacancyId);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(list, list.getClass().getSimpleName(), method);
+        beanToCsv(list, list.getClass().getSimpleName(), method, vacancy);
     }
 
     @Override
@@ -388,7 +349,7 @@ public class DataProviderCSV implements Interface {
         int index = list.indexOf(profileEmployeeGetById(userId));
         list.set(index, profileEmployee);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(list, list.getClass().getSimpleName(), method);
+        beanToCsv(list, list.getClass().getSimpleName(), method, profileEmployee);
     }
 
     @Override
@@ -397,7 +358,7 @@ public class DataProviderCSV implements Interface {
         int index = list.indexOf(profileEmployerGetById(userId));
         list.set(index, profileEmployer);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(list, list.getClass().getSimpleName(), method);
+        beanToCsv(list, list.getClass().getSimpleName(), method, profileEmployer);
     }
 
     @Override
@@ -406,7 +367,7 @@ public class DataProviderCSV implements Interface {
         int index = list.indexOf(vacancyGetById(vacancyId));
         list.set(index, vacancy);
         String method = currentThread().getStackTrace()[1].getMethodName();
-        beanToCsv(list, list.getClass().getSimpleName(), method);
+        beanToCsv(list, list.getClass().getSimpleName(), method, vacancy);
     }
 
 }

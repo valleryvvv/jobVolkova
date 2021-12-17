@@ -1,6 +1,8 @@
 package ru.sfedu.model;
 
 import com.opencsv.bean.CsvBindByName;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 import ru.sfedu.Constants;
 
 import java.io.Serializable;
@@ -8,38 +10,34 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-//@Entity
-//@Table(name= Constants.NAME_TABLE_PROFILE)
+@Root(name = "Profile")
 public class Profile implements Serializable {
 
-    private Set<Feedback> feedback = new HashSet<Feedback>();
-
-    public void addFeedback(Feedback newFeedback){
-        feedback.add(newFeedback);
-    }
-
-    public Set<Feedback> getFeedback(){
-        return feedback;
-    }
-
+    @Element(name = Constants.PROFILE_USER_ID)
     @CsvBindByName(column = Constants.PROFILE_USER_ID)
     private long userId;
 
+    @Element(name = Constants.PROFILE_NAME)
     @CsvBindByName(column =Constants.PROFILE_NAME)
     private String name;
 
+    @Element(name = Constants.PROFILE_LAST_NAME)
     @CsvBindByName(column =Constants.PROFILE_LAST_NAME)
     private String lastName;
 
+    @Element(name = Constants.PROFILE_BIRTHDAY)
     @CsvBindByName(column =Constants.PROFILE_BIRTHDAY)
     private String birthday;
 
+    @Element(name = Constants.PROFILE_CITY)
     @CsvBindByName(column =Constants.PROFILE_CITY)
     private String city;
 
+    @Element(name = Constants.PROFILE_RATING)
     @CsvBindByName(column =Constants.PROFILE_RATING)
     private int rating;
 
+    @Element(name = Constants.PROFILE_EMPLOYER)
     @CsvBindByName(column =Constants.PROFILE_EMPLOYER)
     private boolean employer;
 
@@ -54,6 +52,7 @@ public class Profile implements Serializable {
         this.rating = rating;
         this.employer = employer;
     }
+
 
     public long getUserId() {
         return userId;

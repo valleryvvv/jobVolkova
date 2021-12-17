@@ -1,0 +1,38 @@
+<Data>
+   <object class="ru.sfedu.model.Profile">
+      <userId>9</userId>
+      <name>Lala</name>
+      <lastName>La</lastName>
+      <birthday>12.12.2000</birthday>
+      <city>c</city>
+      <rating>99</rating>
+      <employer>true</employer>
+   </object>
+   <object class="ru.sfedu.model.Profile">
+      <userId>9</userId>
+      <name>Lala</name>
+      <lastName>La</lastName>
+      <birthday>12.12.2000</birthday>
+      <city>c</city>
+      <rating>99</rating>
+      <employer>false</employer>
+   </object>
+   <object class="ru.sfedu.model.Profile">
+      <userId>9</userId>
+      <name>Lala</name>
+      <lastName>La</lastName>
+      <birthday>12.12.2000</birthday>
+      <city>c</city>
+      <rating>99</rating>
+      <employer>false</employer>
+   </object>
+   <object class="ru.sfedu.model.Profile">
+      <userId>9</userId>
+      <name>Lala</name>
+      <lastName>La</lastName>
+      <birthday>12.12.2000</birthday>
+      <city>c</city>
+      <rating>99</rating>
+      <employer>false</employer>
+   </object>
+</Data>

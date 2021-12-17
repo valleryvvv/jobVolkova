@@ -14,10 +14,10 @@ public class ProfileTest {
 
     @Test
     public void testProfileSelect(){
-        List<Vacancy> profiles = dpc.selectVacancy();
-        for (Vacancy e : profiles) {
-            log.info(e.getVacancyId());
-        }
+//        List<Vacancy> profiles = dpc.selectVacancy();
+//        for (Vacancy e : profiles) {
+//            log.info(e.getVacancyId());
+//        }
 //        List<Feedback> feedbacks = dpc.selectFeedback();
 //        for (Feedback e : feedbacks){
 //            log.info(e.getText());
@@ -37,7 +37,7 @@ public class ProfileTest {
         Profile profile = new Profile(2,"Lala","La","12.12.2000","c",99,false);
         dpc.insertProfile(profile);
         testProfileSelect();
-        dpc.deleteProfileById(2);
+      //  dpc.deleteProfileById(2);
 
     }
 

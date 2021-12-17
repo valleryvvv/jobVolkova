@@ -1,28 +1,37 @@
 package ru.sfedu.model;
 
 import com.opencsv.bean.CsvBindByName;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 import ru.sfedu.Constants;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@Root(name = "ProfileEmployee")
 public class ProfileEmployee extends Profile{
 
+    @Element(name = "workExperience")
     @CsvBindByName(column = "workExperience")
     private String workExperience;
 
+    @Element(name = "education")
     @CsvBindByName(column = "education")
     private String education;
 
+    @Element(name = "resume")
     @CsvBindByName(column = "resume")
     private String resume;
 
+    @Element(name = "areaWork")
     @CsvBindByName(column = "areaWork")
     private String areaWork;
 
+    @Element(name = "post")
     @CsvBindByName(column = "post")
     private String post;
 
+    @Element(name = "workRemotely")
     @CsvBindByName(column = "workRemotely")
     private Boolean workRemotely;
 

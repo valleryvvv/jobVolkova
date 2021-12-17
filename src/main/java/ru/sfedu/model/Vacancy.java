@@ -1,35 +1,47 @@
 package ru.sfedu.model;
 
 import com.opencsv.bean.CsvBindByName;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
 import java.util.Objects;
 
+@Root(name = "Vacancy")
 public class Vacancy {
 
+    @Element(name = "vacancyId")
     @CsvBindByName(column = "vacancyId")
     private long vacancyId;
 
+    @Element(name = "idProfileEmployer")
     @CsvBindByName(column = "idProfileEmployer")
     private long idProfileEmployer;
 
+    @Element(name = "areaWork")
     @CsvBindByName(column = "areaWork")
     private String areaWork;
 
+    @Element(name = "titleWork")
     @CsvBindByName(column = "titleWork")
     private String titleWork;
 
+    @Element(name = "description")
     @CsvBindByName(column = "description")
     private String description;
 
+    @Element(name = "city")
     @CsvBindByName(column = "city")
     private String city;
 
+    @Element(name = "remotely")
     @CsvBindByName(column = "remotely")
     private  Boolean remotely;
 
+    @Element(name = "deadline")
     @CsvBindByName(column = "deadline")
     private String deadline;
 
+    @Element(name = "price")
     @CsvBindByName(column = "price")
     private float price;
 

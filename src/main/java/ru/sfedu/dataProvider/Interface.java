@@ -4,13 +4,15 @@ import ru.sfedu.model.*;
 
 import java.util.List;
 
-public interface Interface {
+public abstract interface Interface {
+
+    void sendHistory(String className, String methodName, Object object, Status status);
 
     List<ProfileEmployee> employeeSearch(EmployeeRequest employeeRequest);
     List<Vacancy> partTimeJobSearch(JobRequest jobRequest);
     void changeRating(long userId, int newRating);
     Status makeFeedback(Feedback feedback);
-    void editProfile(long userId, Profile profile);
+    Status editProfile(long userId, Profile profile);
     void createProfileEmployee(ProfileEmployee profileEmployee);
     Status createProfileEmployer(ProfileEmployer profileEmployer);
     void postVacancy(Vacancy vacancy);
@@ -18,7 +20,7 @@ public interface Interface {
     List<Profile> selectProfile();
     Profile profileGetById(long userId);
     void insertProfile(Profile profile);
-    void deleteProfileById(long userId);
+    Status deleteProfileById(long userId);
 
     List<Feedback> selectFeedback();
     Feedback feedbackGetById(long feedbackId);

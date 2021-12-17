@@ -1,14 +1,18 @@
 package ru.sfedu.model;
 
 import com.opencsv.bean.CsvBindByName;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Root(name = "ProfileEmployer")
 public class ProfileEmployer extends Profile{
 
+    @Element(name = "nameCompany")
     @CsvBindByName(column = "nameCompany")
     private String nameCompany;
 
